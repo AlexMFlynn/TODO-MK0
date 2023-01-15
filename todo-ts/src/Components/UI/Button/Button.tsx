@@ -1,4 +1,4 @@
-import { MouseEventHandler, PropsWithChildren, ReactNode } from 'react'
+import { MouseEventHandler, PropsWithChildren } from 'react'
 import './Button.css'
 
 
@@ -7,9 +7,6 @@ export interface ButtonProps extends PropsWithChildren {
     type?: "button" | "submit" | "reset" | undefined;
     kind?: string;
     color?: string;
-    isLoading?: boolean;
-    loadingChildren?: ReactNode;
-
 };
 
 export function Button({
@@ -17,18 +14,15 @@ export function Button({
     children,
     type = 'button',
     kind,
-    color = 'button-primary',
-    isLoading = false,
-    loadingChildren
+    color = 'primary',
 }: ButtonProps) {
     return (
         <button
             className={`${color} ${kind}`}
-            disabled={isLoading}
             onClick={onClick}
             type={type}
         >
-            {(isLoading ? loadingChildren : children)}
+            {children}
         </button >
     );
 };

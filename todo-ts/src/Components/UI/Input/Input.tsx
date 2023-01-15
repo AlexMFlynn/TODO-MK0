@@ -9,9 +9,6 @@ export interface InputProps {
     value: string;
     onValueChange: ChangeEventHandler;
     isReadOnly?: false;
-    placeholder?: null;
-    prefix?: null;
-    suffix?: null;
     onFocus?: () => {};
     onBlur?: () => {};
     hideClear?: false;
@@ -24,9 +21,6 @@ export function Input({
     value,
     onValueChange,
     isReadOnly = false,
-    placeholder = null,
-    prefix = null,
-    suffix = null,
     onFocus,
     onBlur,
     hideClear = false

@@ -2,19 +2,18 @@ import { ChangeEvent, useState } from "react";
 import { TaskProps } from "../Tasks/Task";
 import { Button } from "../UI/Button/Button";
 import { Input } from "../UI/Input/Input";
+import { v4 as uuidv4 } from 'uuid';
 
 export interface TaskFormProps {
-    //TODO: change type
-    onNewTask: (taskData: TaskProps) => {};
-}
+    onNewTask: (taskData: TaskProps) => void;
+};
 
 export function TaskForm({ onNewTask }: TaskFormProps) {
     const [userInput, setUserInput] = useState({
         title: '',
-        description: ''
+        description: '',
+        key: uuidv4()
     });
-
-    //use : after function params to type its return value
     const changeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
         let targetId = event.target.id;
         setUserInput(prevState => {
@@ -22,7 +21,7 @@ export function TaskForm({ onNewTask }: TaskFormProps) {
                 return {
                     ...prevState,
                     title: event.target.value
-                }
+                };
             } else {
                 return {
                     ...prevState,
@@ -33,9 +32,9 @@ export function TaskForm({ onNewTask }: TaskFormProps) {
     };
     const submitHandler = (event: ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log('submitted')
-        onNewTask(userInput)
+        onNewTask(userInput);
         setUserInput({
+            ...userInput,
             title: '',
             description: ''
         });
