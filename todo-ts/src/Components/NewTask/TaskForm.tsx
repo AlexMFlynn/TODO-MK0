@@ -8,6 +8,7 @@ export interface TaskFormProps {
     onNewTask: (taskData: TaskProps) => void;
 };
 
+//TODO: Fix bug where adding multiple tasks consecutivley results in the same key
 export function TaskForm({ onNewTask }: TaskFormProps) {
     const [userInput, setUserInput] = useState({
         title: '',
@@ -50,7 +51,7 @@ export function TaskForm({ onNewTask }: TaskFormProps) {
                         label={'Title'}
                         value={userInput.title}
                         onValueChange={changeHandler}
-                    ></Input>
+                    />
                 </div>
                 <div>
                     <Input
@@ -59,10 +60,16 @@ export function TaskForm({ onNewTask }: TaskFormProps) {
                         label={'Description'}
                         value={userInput.description}
                         onValueChange={changeHandler}
-                    ></Input>
+                    />
                 </div>
             </div>
-            <Button kind="raised" type='submit' onClick={() => { }}>Submit</Button>
+            <Button
+                kind="raised"
+                type='submit'
+                onClick={() => { }}
+            >
+                Submit
+            </Button>
         </form>
     );
 };

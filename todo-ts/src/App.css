@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  padding: 5rem 1rem;
 }
 
 .App-logo {
@@ -35,4 +36,36 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+nav.top-nav{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+nav.top-nav h3{
+  margin: 1rem;
+  cursor: pointer;
+}
+
+h3 {
+  border-radius: 1em;
+  background: none;
+  color: #ffa260;
+  border: 2px solid;
+  padding: 1em 2em;
+  font-size: 1em;
+  transition: border-color 0.25s, color 0.25s, box-shadow 0.25s, transform 0.25s;
+
+}
+
+h3:hover {
+  border-color: #f1ff5c;
+  color: #f1ff5c;
+  box-shadow: 0 0.2em 0.5em 0 #f1ff5c, inset 0 0 0.2em 0 #f1ff5c;
+  transform: translateY(-0.25em);
+  cursor: pointer;
+  text-shadow: 0 0 0.125em hsl(0, 0%, 100%), 0 0 0.5em white;
 }

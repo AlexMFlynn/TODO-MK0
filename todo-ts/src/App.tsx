@@ -1,48 +1,69 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import { NewTask } from './Components/NewTask/NewTask';
-import { ChakraProvider } from '@chakra-ui/react'
+import { Box, ChakraProvider } from '@chakra-ui/react'
 import { AllTasks } from './Components/Tasks/AllTasks';
 import { TaskProps } from './Components/Tasks/Task';
-import { v4 as uuidv4 } from 'uuid';
-
-import { Test } from './Components/UI/Test';
-
-const DUMMY_TASKS: {
-  title: string,
-  description: string,
-  key: string;
-}[] = [{
-  title: 'Sweep',
-  description: 'Sweep all hard floors in the house',
-  key: uuidv4()
-}, {
-  title: 'Mop',
-  description: 'Mop all hard floors in the house, after sweeping is finished',
-  key: uuidv4()
-}, {
-  title: 'Wash Laundry',
-  description: 'Take laundry upstairs to be washed',
-  key: uuidv4()
-}];
-
 
 export default function App() {
-  // const [view, setView] = useState('list');
-  const [tasks, setTasks] = useState(DUMMY_TASKS)
+  const [view, setView] = useState('list');
+
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem('tasksList');
+    if (savedTasks) {
+      return (
+        JSON.parse(savedTasks)
+      )
+    } else {
+      return ''
+    };
+  });
+
   const onAddTaskHandler = (taskData: TaskProps): any => {
-    setTasks(prevTasks => {
+    setTasks((prevTasks: { tasks: TaskProps }[]) => {
       return [
         taskData, ...prevTasks
       ];
     });
   };
 
+  const handleRemoveTask = (key: string) => {
+    setTasks((prevTasks: {
+      title: string;
+      description: string;
+      key: string;
+    }[]) => {
+      const updatedTasks = prevTasks.filter(task => {
+        return (task.key !== key)
+      });
+      return updatedTasks
+    });
+  };
+
+  useEffect(() => {
+    localStorage.setItem('tasksList', JSON.stringify(tasks))
+  });
+
+
   return (
     <ChakraProvider>
-      <NewTask onAddTask={onAddTaskHandler} />
-      <AllTasks tasks={tasks} />
+      <Box className='App'>
+        <nav className='top-nav'>
+          <h3
+            onClick={() => setView('list')}
+            style={{ color: view === 'list' ? '#4E6C50' : '#F2DEBA' }}
+          >
+            Task List
+          </h3>
+          <h3
+            onClick={() => setView('createTask')}
+            style={{ color: view === 'createTask' ? '#4E6C50' : '#F2DEBA' }}
+          >
+            Add New Task
+          </h3>
+        </nav>
+        {view === 'list' ? <AllTasks onRemove={handleRemoveTask} tasks={tasks} /> : <NewTask onAddTask={onAddTaskHandler} />}
+      </Box>
     </ChakraProvider>
-
   );
 };
