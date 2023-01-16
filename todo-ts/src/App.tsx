@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { NewTask } from './Components/NewTask/NewTask';
-import { Box, ChakraProvider } from '@chakra-ui/react'
-import { AllTasks } from './Components/Tasks/AllTasks';
+import { ChakraProvider } from '@chakra-ui/react'
 import { TaskProps } from './Components/Tasks/Task';
 import { Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
@@ -11,16 +9,14 @@ import { AddTask } from './pages/AddTask';
 import { NavBar } from './Components/UI/NavBar/NavBar';
 
 export default function App() {
-  const [view, setView] = useState('list');
-
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem('tasksList');
     if (savedTasks) {
       return (
         JSON.parse(savedTasks)
-      )
+      );
     } else {
-      return ''
+      return ('');
     };
   });
 

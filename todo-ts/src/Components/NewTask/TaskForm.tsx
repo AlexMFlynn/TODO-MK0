@@ -5,10 +5,10 @@ import { Input } from "../UI/Input/Input";
 import { v4 as uuidv4 } from 'uuid';
 
 export interface TaskFormProps {
-    onNewTask: (taskData: TaskProps) => void;
+    onAddTask: (taskData: TaskProps) => void;
 };
 
-export function TaskForm({ onNewTask }: TaskFormProps) {
+export function TaskForm({ onAddTask }: TaskFormProps) {
     const [userInput, setUserInput] = useState({
         title: '',
         description: '',
@@ -32,7 +32,7 @@ export function TaskForm({ onNewTask }: TaskFormProps) {
     };
     const submitHandler = (event: ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
-        onNewTask(userInput);
+        onAddTask(userInput);
         setUserInput({
             title: '',
             description: '',

@@ -1,3 +1,5 @@
+//This component is uded to test ideas before implementing into project
+
 import { Box, Card, CardBody, CardHeader, Heading, StackDivider, Text, Stack } from "@chakra-ui/react";
 
 //export function Test() {

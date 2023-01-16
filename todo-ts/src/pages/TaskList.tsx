@@ -18,5 +18,5 @@ export function TaskList({
         <Box>
             <AllTasks tasks={tasks} onRemove={onRemoveTask} />
         </Box>
-    )
-}
+    );
+};

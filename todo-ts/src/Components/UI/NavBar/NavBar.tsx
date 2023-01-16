@@ -21,5 +21,5 @@ export function NavBar() {
                 </BreadcrumbLink>
             </BreadcrumbItem>
         </Breadcrumb>
-    )
-}
+    );
+};
