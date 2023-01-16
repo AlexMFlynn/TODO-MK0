@@ -4,6 +4,11 @@ import { NewTask } from './Components/NewTask/NewTask';
 import { Box, ChakraProvider } from '@chakra-ui/react'
 import { AllTasks } from './Components/Tasks/AllTasks';
 import { TaskProps } from './Components/Tasks/Task';
+import { Route, Routes } from 'react-router-dom';
+import { Home } from './pages/Home';
+import { TaskList } from './pages/TaskList';
+import { AddTask } from './pages/AddTask';
+import { NavBar } from './Components/UI/NavBar/NavBar';
 
 export default function App() {
   const [view, setView] = useState('list');
@@ -19,7 +24,7 @@ export default function App() {
     };
   });
 
-  const onAddTaskHandler = (taskData: TaskProps): any => {
+  const handleOnAddTask = (taskData: TaskProps): any => {
     setTasks((prevTasks: { tasks: TaskProps }[]) => {
       return [
         taskData, ...prevTasks
@@ -46,24 +51,21 @@ export default function App() {
 
 
   return (
-    <ChakraProvider>
-      <Box className='App'>
-        <nav className='top-nav'>
-          <h3
-            onClick={() => setView('list')}
-            style={{ color: view === 'list' ? '#4E6C50' : '#F2DEBA' }}
-          >
-            Task List
-          </h3>
-          <h3
-            onClick={() => setView('createTask')}
-            style={{ color: view === 'createTask' ? '#4E6C50' : '#F2DEBA' }}
-          >
-            Add New Task
-          </h3>
-        </nav>
-        {view === 'list' ? <AllTasks onRemove={handleRemoveTask} tasks={tasks} /> : <NewTask onAddTask={onAddTaskHandler} />}
-      </Box>
-    </ChakraProvider>
+    <ChakraProvider >
+
+      <NavBar />
+      <main>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path='/taskList' element={
+            <TaskList tasks={tasks} onRemoveTask={handleRemoveTask} />
+          } />
+          <Route path='/addtask' element={
+            <AddTask onAddTask={handleOnAddTask} />
+          } />
+        </Routes>
+
+      </main>
+    </ChakraProvider >
   );
 };
