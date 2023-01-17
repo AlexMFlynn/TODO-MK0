@@ -1,14 +1,22 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { ChakraProvider } from '@chakra-ui/react'
 import { TaskProps } from './Components/Tasks/Task';
 import { Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { TaskList } from './pages/TaskList';
 import { AddTask } from './pages/AddTask';
 import { NavBar } from './Components/UI/NavBar/NavBar';
+import { Flex, Heading, VStack } from '@chakra-ui/layout';
+import { IconButton } from '@chakra-ui/button';
+import { SunIcon, MoonIcon, WarningIcon } from '@chakra-ui/icons'
+import { useColorMode } from '@chakra-ui/color-mode';
+
 
 export default function App() {
+
+  const { colorMode, toggleColorMode } = useColorMode();
+  const isDark = colorMode === 'dark';
+
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem('tasksList');
     if (savedTasks) {
@@ -47,9 +55,21 @@ export default function App() {
 
 
   return (
-    <ChakraProvider >
 
-      <NavBar />
+    <VStack p={5}>
+      <Flex w='100%'>
+        <Heading
+          ml='8' size='md' fontWeight='semibold' color='cyan.400'
+        >
+          <NavBar />
+        </Heading>
+      </Flex>
+      <IconButton
+        icon={isDark ? <SunIcon /> : <MoonIcon />}
+        aria-label='Light Mode'
+        isRound={true}
+        onClick={toggleColorMode}
+      />
       <main>
         <Routes>
           <Route index element={<Home />} />
@@ -62,6 +82,6 @@ export default function App() {
         </Routes>
 
       </main>
-    </ChakraProvider >
+    </VStack >
   );
 };
