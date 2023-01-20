@@ -1,6 +1,5 @@
-import { Box } from "@chakra-ui/react";
 import { TaskForm } from "../Components/NewTask/TaskForm";
-import { TaskProps } from "../Components/Tasks/Task";
+import { TaskProps } from "../Components/Tasks/TaskProps";
 
 
 export interface AddTaskProps {
@@ -9,8 +8,6 @@ export interface AddTaskProps {
 
 export function AddTask({ onAddTask }: AddTaskProps) {
     return (
-        <Box>
-            <TaskForm onAddTask={onAddTask} />
-        </Box>
+        <TaskForm onAddTask={onAddTask} />
     );
 };

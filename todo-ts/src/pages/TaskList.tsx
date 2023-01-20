@@ -1,4 +1,3 @@
-import { Box } from "@chakra-ui/react";
 import { AllTasks } from "../Components/Tasks/AllTasks";
 
 export interface TaskListProps {
@@ -15,8 +14,9 @@ export function TaskList({
     onRemoveTask
 }: TaskListProps) {
     return (
-        <Box>
-            <AllTasks tasks={tasks} onRemove={onRemoveTask} />
-        </Box>
+        <AllTasks
+            tasks={tasks}
+            onRemove={onRemoveTask}
+        />
     );
 };

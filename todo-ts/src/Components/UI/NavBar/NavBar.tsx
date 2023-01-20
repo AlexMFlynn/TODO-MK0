@@ -4,7 +4,9 @@ import { NavLink } from "react-router-dom";
 
 export function NavBar() {
     return (
-        <Breadcrumb separator='|'>
+        <Breadcrumb
+            color='teal'
+            separator='|'>
             <BreadcrumbItem>
                 <BreadcrumbLink as={NavLink} to='/' end>
                     Home

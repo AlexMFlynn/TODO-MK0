@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { TaskProps } from './Components/Tasks/Task';
+import { TaskProps } from './Components/Tasks/TaskProps';
 import { Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { TaskList } from './pages/TaskList';
 import { AddTask } from './pages/AddTask';
 import { NavBar } from './Components/UI/NavBar/NavBar';
-import { Flex, Heading, VStack } from '@chakra-ui/layout';
+import { Flex, Heading, Spacer, VStack } from '@chakra-ui/layout';
 import { IconButton } from '@chakra-ui/button';
-import { SunIcon, MoonIcon, WarningIcon } from '@chakra-ui/icons'
+import { SunIcon, MoonIcon } from '@chakra-ui/icons'
 import { useColorMode } from '@chakra-ui/color-mode';
 
 
@@ -63,25 +63,23 @@ export default function App() {
         >
           <NavBar />
         </Heading>
+        <Spacer />
+        <IconButton
+          icon={isDark ? <SunIcon /> : <MoonIcon />}
+          aria-label='Light and Dark mode toggle'
+          isRound={true}
+          onClick={toggleColorMode}
+        />
       </Flex>
-      <IconButton
-        icon={isDark ? <SunIcon /> : <MoonIcon />}
-        aria-label='Light Mode'
-        isRound={true}
-        onClick={toggleColorMode}
-      />
-      <main>
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path='/taskList' element={
-            <TaskList tasks={tasks} onRemoveTask={handleRemoveTask} />
-          } />
-          <Route path='/addtask' element={
-            <AddTask onAddTask={handleOnAddTask} />
-          } />
-        </Routes>
-
-      </main>
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path='/taskList' element={
+          <TaskList tasks={tasks} onRemoveTask={handleRemoveTask} />
+        } />
+        <Route path='/addtask' element={
+          <AddTask onAddTask={handleOnAddTask} />
+        } />
+      </Routes>
     </VStack >
   );
 };

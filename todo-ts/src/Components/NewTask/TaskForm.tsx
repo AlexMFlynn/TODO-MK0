@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import { TaskProps } from "../Tasks/Task";
+import { TaskProps } from "../Tasks/TaskProps";
 import { Button } from "../UI/Button/Button";
 import { Input } from "../UI/Input/Input";
 import { v4 as uuidv4 } from 'uuid';
