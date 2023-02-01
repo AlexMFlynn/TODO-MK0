@@ -1,9 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { TaskProps } from "../Tasks/TaskProps";
-import { Button } from "../UI/Button/Button";
-import { Input } from "../UI/Input/Input";
 import { v4 as uuidv4 } from 'uuid';
-import { useToast } from "@chakra-ui/react";
+import { Button, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Input, useToast, VStack } from "@chakra-ui/react";
 
 export interface TaskFormProps {
     onAddTask: (taskData: TaskProps) => void;
@@ -18,6 +16,7 @@ export function TaskForm({ onAddTask }: TaskFormProps) {
     });
     const changeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
         let targetId = event.target.id;
+        console.log(event.target)
         setUserInput(prevState => {
             if (targetId === 'title') {
                 return {
@@ -47,35 +46,107 @@ export function TaskForm({ onAddTask }: TaskFormProps) {
             key: uuidv4()
         });
     };
+
+    const [isTitleError, setIsTitleError] = useState(false);
+    const [isDescriptionError, setIsDescriptionError] = useState(false);
+    const onTitleBlur = () => {
+        setIsTitleError(userInput.title === '');
+    };
+    const onDescriptionBlur = () => {
+        setIsDescriptionError(userInput.description === '');
+    };
+
     return (
-        <form onSubmit={submitHandler}>
-            <div>
-                <div>
+        <VStack
+            align='center'
+            w='100%'
+        >
+            <form>
+                <FormControl
+                    isInvalid={isTitleError}
+                    display='flex'
+                    w='100%'
+                    m='2em'
+                >
+                    <FormLabel>Task Title</FormLabel>
                     <Input
-                        type="text"
-                        name='title'
-                        label={'Title'}
+                        id="title"
+                        type='text'
                         value={userInput.title}
-                        onValueChange={changeHandler}
+                        onChange={changeHandler}
+                        onBlur={onTitleBlur}
+                        isRequired
                     />
-                </div>
-                <div>
+                    {!isTitleError ? (
+                        <FormHelperText>
+                            Enter a title for your task
+                        </FormHelperText>
+                    ) : (
+                        <FormErrorMessage>
+                            A title is required to create a new task
+                        </FormErrorMessage>
+                    )}
+                </FormControl>
+                <FormControl
+                    isInvalid={isDescriptionError}
+                    display='flex'
+                    w='100%'
+                    m='2em'
+                >
+                    <FormLabel>Task Description</FormLabel>
                     <Input
-                        type="text"
-                        name='description'
-                        label={'Description'}
+                        type='text'
                         value={userInput.description}
-                        onValueChange={changeHandler}
+                        onChange={changeHandler}
+                        onBlur={onDescriptionBlur}
+                        isRequired
                     />
-                </div>
-            </div>
-            <Button
-                kind="raised"
-                type='submit'
-                onClick={() => { }}
-            >
-                Submit
-            </Button>
-        </form>
+                    {!isDescriptionError ? (
+                        <FormHelperText>
+                            Add a description for your task
+                        </FormHelperText>
+                    ) : (
+                        <FormErrorMessage>
+                            A Description is required to create a new task
+                        </FormErrorMessage>
+                    )}
+                </FormControl>
+                <Button
+                    type="submit"
+                    colorScheme='cyan'
+                >
+                    Create Task
+                </Button>
+            </form>
+        </VStack>
     );
 };
+        // <form onSubmit={submitHandler}>
+        //     <div>
+        //         <div>
+        //             <Input
+        //                 type="text"
+        //                 name='title'
+        //                 label={'Title'}
+        //                 value={userInput.title}
+        //                 onValueChange={changeHandler}
+        //             />
+        //         </div>
+        //         <div>
+        //             <Input
+        //                 type="text"
+        //                 name='description'
+        //                 label={'Description'}
+        //                 value={userInput.description}
+        //                 onValueChange={changeHandler}
+        //             />
+        //         </div>
+        //     </div>
+        //     <Button
+        //         kind="raised"
+        //         type='submit'
+        //         onClick={() => { }}
+        //     >
+        //         Submit
+        //     </Button>
+        // </form>
