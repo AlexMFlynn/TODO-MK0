@@ -3,7 +3,7 @@ import { TaskProps } from "../Components/Tasks/TaskProps";
 
 
 export interface AddTaskProps {
-    onAddTask: (taskData: TaskProps) => {}
+    onAddTask: (taskData: TaskProps) => void;
 };
 
 export function AddTask({ onAddTask }: AddTaskProps) {

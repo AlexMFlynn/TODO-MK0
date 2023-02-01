@@ -3,12 +3,14 @@ import { TaskProps } from "../Tasks/TaskProps";
 import { Button } from "../UI/Button/Button";
 import { Input } from "../UI/Input/Input";
 import { v4 as uuidv4 } from 'uuid';
+import { useToast } from "@chakra-ui/react";
 
 export interface TaskFormProps {
     onAddTask: (taskData: TaskProps) => void;
 };
 
 export function TaskForm({ onAddTask }: TaskFormProps) {
+    const toast = useToast();
     const [userInput, setUserInput] = useState({
         title: '',
         description: '',
@@ -33,13 +35,18 @@ export function TaskForm({ onAddTask }: TaskFormProps) {
     const submitHandler = (event: ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
         onAddTask(userInput);
+        toast({
+            title: `"${userInput.title.toUpperCase()}" was succesfully added!`,
+            position: 'top',
+            status: "success",
+            isClosable: true
+        });
         setUserInput({
             title: '',
             description: '',
             key: uuidv4()
         });
     };
-
     return (
         <form onSubmit={submitHandler}>
             <div>

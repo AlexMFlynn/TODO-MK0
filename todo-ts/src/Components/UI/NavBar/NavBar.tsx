@@ -4,21 +4,33 @@ import { NavLink } from "react-router-dom";
 
 export function NavBar() {
     return (
+
         <Breadcrumb
-            color='teal'
             separator='|'>
             <BreadcrumbItem>
-                <BreadcrumbLink as={NavLink} to='/' end>
+                <BreadcrumbLink
+                    as={NavLink}
+                    to='/' end
+                    color='teal'
+                >
                     Home
                 </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem>
-                <BreadcrumbLink as={NavLink} to='addtask' >
+                <BreadcrumbLink
+                    as={NavLink}
+                    to='addtask'
+                    color='teal'
+                >
                     Add Task
                 </BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbItem >
-                <BreadcrumbLink as={NavLink} to='tasklist'>
+            <BreadcrumbItem>
+                <BreadcrumbLink
+                    as={NavLink}
+                    to='tasklist'
+                    color='teal'
+                >
                     Tasks List
                 </BreadcrumbLink>
             </BreadcrumbItem>

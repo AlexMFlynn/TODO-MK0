@@ -1,12 +1,15 @@
-import { Box, Button, Card, CardBody, CardHeader, Flex, Heading, Spacer, StackDivider, Text, VStack } from "@chakra-ui/react";
+import { DeleteIcon, SearchIcon } from "@chakra-ui/icons";
+import { Box, Card, CardBody, CardHeader, Heading, IconButton, Input, InputGroup, InputLeftElement, Spacer, StackDivider, Text, VStack } from "@chakra-ui/react";
+import { TaskForm } from "../NewTask/TaskForm";
 import { TaskProps } from "./TaskProps";
 
 export interface AllTasksProps {
     tasks: TaskProps[];
-    onRemove: (key: string) => void
+    onRemove: (key: string) => void;
+    onAddTask: (taskData: TaskProps) => void;
 };
 
-export function AllTasks({ tasks, onRemove }: AllTasksProps) {
+export function AllTasks({ tasks, onRemove, onAddTask }: AllTasksProps) {
     const onRemoveHandler = (key: string) => {
         onRemove(key);
     };
@@ -14,9 +17,10 @@ export function AllTasks({ tasks, onRemove }: AllTasksProps) {
     return (
         <VStack
             spacing='2em'
-            w='100%'
+            w='80%'
             align='center'
         >
+            <TaskForm onAddTask={onAddTask} />
             <Heading
                 textAlign='center'
                 w='100%'
@@ -25,9 +29,16 @@ export function AllTasks({ tasks, onRemove }: AllTasksProps) {
                 size='2xl'
                 bg='green'
             >Tasks</Heading>
-
+            <Box display='flex' w='66%'>
+                <InputGroup w='100%' color='green' >
+                    <InputLeftElement children={<SearchIcon />} />
+                    <Input
+                        placeholder="Search for a task"
+                    />
+                </InputGroup>
+            </Box>
             <VStack
-                w='100%'
+                w='90%'
                 divider={<StackDivider />}
                 borderColor='teal'
                 spacing='4'
@@ -40,6 +51,7 @@ export function AllTasks({ tasks, onRemove }: AllTasksProps) {
                             flexDir='row'
                             p='1em'
                             alignItems='center'
+                            variant='filled'
                         >
                             <Box mr='.5em'>
                                 <CardHeader
@@ -59,15 +71,13 @@ export function AllTasks({ tasks, onRemove }: AllTasksProps) {
                                 </CardBody>
                             </Box>
                             <Spacer />
-                            {//TODO: add trash icons
-                            }
-                            <Button
+                            <IconButton
+                                aria-label="delete task"
+                                icon={<DeleteIcon />}
                                 onClick={() => onRemoveHandler(task.key)}
                                 colorScheme='red'
                                 variant='outline'
-                            >
-                                REMOVE
-                            </Button>
+                            />
                         </Card>
                     );
                 })};

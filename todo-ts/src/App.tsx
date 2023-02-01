@@ -28,7 +28,7 @@ export default function App() {
     };
   });
 
-  const handleOnAddTask = (taskData: TaskProps): any => {
+  const handleOnAddTask = (taskData: TaskProps): void => {
     setTasks((prevTasks: { tasks: TaskProps }[]) => {
       return [
         taskData, ...prevTasks
@@ -57,9 +57,15 @@ export default function App() {
   return (
 
     <VStack p={5}>
-      <Flex w='100%'>
+      <Flex
+        alignItems='center'
+        w='100%'
+        p='.5em'
+      >
         <Heading
-          ml='8' size='md' fontWeight='semibold' color='cyan.400'
+          ml='8'
+          size='md'
+          fontWeight='semibold'
         >
           <NavBar />
         </Heading>
@@ -73,8 +79,8 @@ export default function App() {
       </Flex>
       <Routes>
         <Route index element={<Home />} />
-        <Route path='/taskList' element={
-          <TaskList tasks={tasks} onRemoveTask={handleRemoveTask} />
+        <Route path='/tasklist' element={
+          <TaskList tasks={tasks} onRemoveTask={handleRemoveTask} onAddTask={handleOnAddTask} />
         } />
         <Route path='/addtask' element={
           <AddTask onAddTask={handleOnAddTask} />
