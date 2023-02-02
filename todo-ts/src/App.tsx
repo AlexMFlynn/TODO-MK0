@@ -4,7 +4,6 @@ import { TaskProps } from './Components/Tasks/TaskProps';
 import { Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { TaskList } from './pages/TaskList';
-import { AddTask } from './pages/AddTask';
 import { NavBar } from './Components/UI/NavBar/NavBar';
 import { Flex, Heading, Spacer, VStack } from '@chakra-ui/layout';
 import { IconButton } from '@chakra-ui/button';
@@ -81,9 +80,6 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path='/tasklist' element={
           <TaskList tasks={tasks} onRemoveTask={handleRemoveTask} onAddTask={handleOnAddTask} />
-        } />
-        <Route path='/addtask' element={
-          <AddTask onAddTask={handleOnAddTask} />
         } />
       </Routes>
     </VStack >

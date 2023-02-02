@@ -19,15 +19,6 @@ export function NavBar() {
             <BreadcrumbItem>
                 <BreadcrumbLink
                     as={NavLink}
-                    to='addtask'
-                    color='teal'
-                >
-                    Add Task
-                </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbItem>
-                <BreadcrumbLink
-                    as={NavLink}
                     to='tasklist'
                     color='teal'
                 >

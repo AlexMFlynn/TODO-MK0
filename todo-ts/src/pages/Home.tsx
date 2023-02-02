@@ -18,7 +18,7 @@ export function Home() {
                     m='1em'
 
                 >
-                    An easy to use task keeper to keep you on track.
+                    An easy to use task keeper to keep you on task.
                 </Heading>
                 <Heading
                     size='lg'
@@ -28,7 +28,7 @@ export function Home() {
                     <Button
                         ml='2em'
                         as={Link}
-                        to='AddTask'
+                        to='tasklist'
                         colorScheme='whatsapp'
                     >
                         Continue
