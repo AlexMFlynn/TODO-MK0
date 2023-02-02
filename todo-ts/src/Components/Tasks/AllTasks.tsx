@@ -68,7 +68,7 @@ export function AllTasks({ tasks, onRemove, onAddTask }: AllTasksProps) {
                             key={task.key}
                             flexDir='row'
                             p='1em'
-                            alignItems='baseline'
+                            alignItems='center'
                             variant='filled'
                         >
                             <Box mr='.5em'>
@@ -89,24 +89,20 @@ export function AllTasks({ tasks, onRemove, onAddTask }: AllTasksProps) {
                                 </CardBody>
                             </Box>
                             <Spacer />
-                            <Flex flexDir='column'>
-                                {<IconButton
+                            {/* <IconButton
                                     aria-label="edit task"
                                     icon={<EditIcon />}
                                     onClick={onOpen}
                                     colorScheme='purple'
                                     variant='outline'
                                     mb='.2em'
-                                />}
-                                <IconButton
-                                    aria-label="delete task"
-                                    icon={<DeleteIcon />}
-                                    onClick={() => onRemoveHandler(task.key)}
-                                    colorScheme='red'
-                                    variant='outline'
-                                    mt='.2em'
-                                />
-                            </Flex>
+                                /> */}
+                            <IconButton
+                                aria-label="delete task"
+                                icon={<DeleteIcon />}
+                                onClick={() => onRemoveHandler(task.key)}
+                                colorScheme='red'
+                                variant='outline' />
                         </Card>
                     );
                 })};
