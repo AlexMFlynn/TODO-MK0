@@ -77,6 +77,7 @@ export function TaskForm({ onAddTask }: TaskFormProps) {
                     id="title"
                     type='text'
                     value={userInput.title}
+                    placeholder='Get groceries'
                     onChange={changeHandler}
                     onBlur={onTitleBlur}
                     required
@@ -102,6 +103,7 @@ export function TaskForm({ onAddTask }: TaskFormProps) {
                 <Input
                     type='text'
                     value={userInput.description}
+                    placeholder='Buy milk, eggs, butter, ...'
                     onChange={changeHandler}
                     onBlur={onDescriptionBlur}
                     required
