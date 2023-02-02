@@ -31,6 +31,7 @@
     "dev": "next dev",
     "lint": "next lint"
   },
+  "homepage": "https://alexmflynn.github.io/react-typescript-projects/",
   "eslintConfig": {
     "extends": [
       "react-app",
