@@ -78,7 +78,7 @@ export default function App() {
       </Flex>
       <Routes>
         <Route index element={<Home />} />
-        <Route path='/tasklist' element={
+        <Route path='tasklist' element={
           <TaskList tasks={tasks} onRemoveTask={handleRemoveTask} onAddTask={handleOnAddTask} />
         } />
       </Routes>
